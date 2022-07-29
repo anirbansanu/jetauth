@@ -46,4 +46,13 @@
         @endforeach
       </div>
     </div>
+    <style>
+        .pagination .active{
+            background: #222 !important;
+            color: aliceblue !important;
+        }
+    </style>
+    <div class="d-flex justify-content-center">
+        {!! $products->links() !!}
+    </div>
   </div>
