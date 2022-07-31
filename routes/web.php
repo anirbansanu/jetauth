@@ -44,6 +44,8 @@ Route::get("/delete_categories/{id?}",[CategoryController::class,'deleteCategory
 
 Route::get("/products",[AdminController::class,'getProducts'])->name('admin.products');
 
+Route::get("/allproducts",[ProductController::class,'getAllProducts'])->name('user.allproducts');
+
 Route::get("/addproduct",[ProductController::class,'getCategories'])->name('admin.addproduct');
 
 Route::post("/setproduct",[AdminController::class,'setProducts'])->name('admin.setproduct');
