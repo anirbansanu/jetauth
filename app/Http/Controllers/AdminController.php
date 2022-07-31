@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -63,5 +64,55 @@ class AdminController extends Controller
         else
         return response()->json(['data' => 'Operation Failed','usertype'=> $data->usertype], 201); 
     }
-    
+    function updateProduct(Request $request)
+    {
+        $data = Product::find($request->id);
+        $data->title = $request->title;
+        $data->price = $request->price;
+        $data->quantity = $request->quantity;
+        $data->description = $request->description;
+        $cat = Category::find($request->category_id);
+        if(!$cat)
+        return redirect()->back()->with('error', 'Category Not Exists, Operation Failed');
+        if($request->hasFile("file"))
+        {
+            $d_path = "public/product_imgs/";
+            $image = $request->file("file");
+            $imageName = date('YmdHi').$image->getClientOriginalName();
+            $path = $request->file("file")->storeAs($d_path,$imageName);
+            if($path)
+            {
+                $data->image = $imageName;
+                $cat->product()->update($data);
+            }
+            else
+            {
+                return redirect()->back()->with('error', 'Image Upload Failed, Add Operation Failed');
+            }
+        }
+        return redirect()->back()->with('success', 'Data has been saved');
+
+    }
+    function viewProduct($id){
+        $product = Product::join('categories', 'products.category_id', '=', 'categories.id',"left outer")
+        ->select('products.*','categories.cat_title')
+        ->where('products.id','=',$id)
+        ->first();
+        $data = Category::all();
+        //return [$product,$data];
+        return view('admin.updateproduct',["product"=>$product,"data"=>$data]);
+    }
+    function deleteProduct($id){
+        $product = Product::find($id);
+        if(Storage::exists('public/product_imgs/'.$product->image)){
+            if ($product->delete() && Storage::delete('public/product_imgs/'.$product->image))
+            return response()->json(['success' => 'Data Deleted','title'=> $product->title], 201);
+            else
+            return response()->json(['error' => 'Delete Operation Failed',]);
+            
+        }else{
+            return response()->json(['error' => 'Product Image not exist Operation Failed',]);
+        }
+        
+    }
 }

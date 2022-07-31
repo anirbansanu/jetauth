@@ -42,7 +42,15 @@ Route::post("/categories",[CategoryController::class,'setCategory'])->name('admi
 Route::get("/categories",[CategoryController::class,'getAll'])->name('admin.categories');
 Route::get("/delete_categories/{id?}",[CategoryController::class,'deleteCategory'])->name('admin.deletecategory');
 
+
+Route::get("/product/{id}",[ProductController::class,'getProduct'])->name('user.product');
+
 Route::get("/products",[AdminController::class,'getProducts'])->name('admin.products');
+Route::get("/updateproduct/{id?}",[AdminController::class,'viewProduct'])->name('admin.updateproduct');
+Route::post("/updateproduct",[AdminController::class,'updateProduct'])->name('admin.updateproduct');
+
+Route::get("/deleteproduct/{id?}",[AdminController::class,'deleteProduct'])->name('admin.deleteproduct');
+
 
 Route::get("/allproducts",[ProductController::class,'getAllProducts'])->name('user.allproducts');
 

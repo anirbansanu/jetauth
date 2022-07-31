@@ -52,12 +52,12 @@
                         </td>
                         
                         <td class="text-center">
-                          <button type="button" class="btn btn-info btn-icon-text"> 
+                          <a href="{{ route("admin.updateproduct") }}/{{ $item["id"] }}" class="btn btn-info btn-icon-text"> 
                             Edit <i class="mdi mdi-file-check btn-icon-append"></i>
-                          </button>
-                          <button type="button" class="btn btn-danger btn-icon-text">
+                          </a>
+                          <a data-productid="{{ $item["id"] }}" class="deleteProductBtn btn btn-danger btn-icon-text">
                             Delete <i class="mdi mdi-delete btn-icon-append"></i> 
-                          </button>
+                          </a>
                         </td>
                       </tr>
                       @endforeach
@@ -77,5 +77,27 @@
     </div>
     <!-- container-scroller -->
     @include('admin.common.js')
+    <script>
+      $(document).ready(function(){
+          $(".deleteProductBtn").on('click', function deleteProduct(){
+              let productid = $(this).data("productid");
+              let row = $(this).parent().parent();
+              console.log(productid);
+              $.ajax({ 
+                  url: "deleteproduct/"+productid,
+                  data: { 
+                      "productid": productid,
+                  },
+                  type: 'GET'
+              }).done(function(responseData) {
+                  console.log(responseData.success);
+                  console.log(responseData.title);
+                  row.remove();
+              }).fail(function() {
+                  console.log(responseData.error);
+              });
+          });
+      }); 
+  </script>
   </body>
 </html>

@@ -27,4 +27,12 @@ class ProductController extends Controller
                               ->paginate(6);
         return view("user.allproducts",['products'=>$products]);
     }
+    function getProduct($id){
+        $product = Product::join('categories', 'products.category_id', '=', 'categories.id',"left outer")
+        ->select('products.*','categories.cat_title')
+        ->where('products.id','=',$id)
+        ->first();
+        //return $product;
+        return view('user.productdetails',["product"=>$product]);
+    }
 }

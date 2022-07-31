@@ -1,10 +1,35 @@
+<style>
+  .latest-products{
+      margin-top: 0px !important;
+  }
+  .page-item.active .page-link {
+    color: #fff !important;
+    background: rgb(236, 83, 83) !important;
+    border: 1px solid #f00;
+  }
+  .page-item .page-link{
+    color: rgb(255, 145, 0);
+    border: 1px solid rgb(238, 128, 26);
+  }
+  .page-item.disabled .page-link{
+    color: rgb(255, 145, 0, 0.4);
+    border: 1px solid rgb(238, 128, 26, 0.6);
+  }
+</style>
 <div class="latest-products">
+    <div class="p-5"></div>
     <div class="container">
+      
       <div class="row">
         <div class="col-md-12">
           <div class="section-heading">
             <h2>Latest Products</h2>
-            <a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
+            <a href="{{ route("user.allproducts") }}">view all products <i class="fa fa-angle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-md-12 pb-5">
+          <div class="d-flex justify-content-center">
+            {!! $products->links() !!}
           </div>
         </div>
         @foreach ($products as $item)
@@ -46,13 +71,8 @@
         @endforeach
       </div>
     </div>
-    <style>
-        .pagination .active{
-            background: #222 !important;
-            color: aliceblue !important;
-        }
-    </style>
+    
     <div class="d-flex justify-content-center">
         {!! $products->links() !!}
     </div>
-  </div>
+</div>

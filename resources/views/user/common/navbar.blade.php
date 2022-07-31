@@ -14,7 +14,7 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" href="products.html">Our Products</a>
+              <a class="nav-link" href="{{ route("user.allproducts") }}">Our Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="about.html">About Us</a>
@@ -41,4 +41,4 @@
         </div>
       </div>
     </nav>
-  </header>
+</header>
