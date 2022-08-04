@@ -19,7 +19,20 @@
 <div class="latest-products">
     <div class="p-5"></div>
     <div class="container">
-      
+      @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        
+                            {!! \Session::get('success') !!}
+                        
+                    </div>
+                @endif
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger">
+                        
+                            {!! \Session::get('error') !!}
+                        
+                    </div>
+                @endif
       <div class="row">
         <div class="col-md-12">
           <div class="section-heading">
@@ -35,7 +48,7 @@
         @foreach ($products as $item)
           <div class="col-md-4">
             <div class="product-item">
-              <a href="#">
+              <a href="{{ route("user.product").'/'.$item["id"] }}">
                 <img src="{{ asset('storage/product_imgs/'.$item["image"]) }}" alt="" style="height:250px;object-fit: scale-down;">
               </a>
               

@@ -25,6 +25,8 @@ class ProductController extends Controller
         $products = Product::join('categories', 'products.category_id', '=', 'categories.id',"left outer")
                               ->select('products.*','categories.cat_title')
                               ->paginate(6);
+              
+        // return $products;
         return view("user.allproducts",['products'=>$products]);
     }
     function getProduct($id){

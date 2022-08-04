@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -43,7 +44,7 @@ Route::get("/categories",[CategoryController::class,'getAll'])->name('admin.cate
 Route::get("/delete_categories/{id?}",[CategoryController::class,'deleteCategory'])->name('admin.deletecategory');
 
 
-Route::get("/product/{id}",[ProductController::class,'getProduct'])->name('user.product');
+Route::get("/product/{id?}",[ProductController::class,'getProduct'])->name('user.product');
 
 Route::get("/products",[AdminController::class,'getProducts'])->name('admin.products');
 Route::get("/updateproduct/{id?}",[AdminController::class,'viewProduct'])->name('admin.updateproduct');
@@ -57,3 +58,9 @@ Route::get("/allproducts",[ProductController::class,'getAllProducts'])->name('us
 Route::get("/addproduct",[ProductController::class,'getCategories'])->name('admin.addproduct');
 
 Route::post("/setproduct",[AdminController::class,'setProducts'])->name('admin.setproduct');
+
+Route::post("/cart",[HomeController::class,'addCart'])->name('user.cart');
+Route::get("/cart",[HomeController::class,'getCart'])->name('user.cart');
+Route::post("/updatecart",[HomeController::class,'updateCart'])->name('user.updatecart');
+
+

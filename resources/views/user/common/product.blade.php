@@ -1,5 +1,29 @@
+<style>
+    .btn-danger{
+        background-color: rgb(238, 53, 53);
+        color: rgb(255, 255, 255);
+    }
+    
+</style>
+
 <div class="container-fluid p-1">
     <div class="mt-5 p-5"></div>
+    <div class="p-3 mt-5">
+        @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        
+                            {!! \Session::get('success') !!}
+                        
+                    </div>
+                @endif
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger">
+                        
+                            {!! \Session::get('error') !!}
+                        
+                    </div>
+                @endif
+    </div>
     <div class="row m-0">
         <div class="col-md-6 d-flex justify-content-center">
             <img class="img-fluid" src="{{ asset('storage/product_imgs/'.$product["image"]) }}" alt="..."/>
@@ -24,8 +48,13 @@
                     <p class="font-weight-bold h5 py-1">Description</p>
                     <p class="border-bottom py-3">{{ $product['description']  }}</p>
                     <div class="card-body d-flex justify-content-between px-0">
-                        <a href="" class="btn btn-lg btn-danger">Add To Cart</a>
-                        <a href="" class="btn btn-lg btn-outline-danger">Buy Now</a>
+                        <form method="POST" action="{{ route('user.cart') }}">
+                            @csrf
+                            <input class="hidden" type="hidden" name="product_id" value="{{ $product['id']  }}"/>
+                            <button type="submit" name="addToCart" class="btn btn-lg btn-danger">Add To Cart</button>
+                        </form>
+                            <button type="submit" name="Buy" class="btn btn-lg btn-outline-danger">Buy Now</button>
+                        
                     </div>
                 </div>
             </div>
