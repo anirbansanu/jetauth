@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -92,5 +94,54 @@ class HomeController extends Controller
 
         }
         
+    }
+    function deleteCart(Request $request){
+        $u_id = auth()->user()?auth()->user()->id:false;
+        if($u_id)
+        {
+            $c = Cart::find($request->cart_id);
+            $c->delete();
+        }
+    }
+    function setOrder(Request $req){
+        $u_id = auth()->user()?auth()->user()->id:false;
+        if($u_id)
+        {
+            $c = Cart::where("user_id","=",$u_id)->get();
+            $data=[];
+            if($c)
+            {
+                for($i=0;$i<count($c);$i++)
+                {
+                    
+                    $data[$i]['product_id'] = $c[$i]->product_id;
+                    $data[$i]['order_quantity'] = $c[$i]->order_quantity;
+                    $data[$i]['order_price'] = $c[$i]->order_price;
+                    $data[$i]['user_id'] = $c[$i]->user_id;
+                    if(Order::create($data[$i]))
+                    Cart::where('user_id',$u_id)->delete();
+
+                }
+                
+                return redirect()->route('user.order');
+            }
+            else
+            return redirect()->back();
+        }
+        return redirect('login');
+    }
+    function getOrder(){
+        $u_id = auth()->user()?auth()->user()->id:false;
+        if($u_id)
+        {
+            $o = Order::join('products', 'orders.product_id', '=', 'products.id')
+                            ->join('users', 'orders.user_id', '=', 'users.id')
+                            ->select('products.*','users.name','users.address','users.phone','orders.*')
+                            ->where('orders.user_id','=',$u_id)
+                            ->get();
+            //return $carts;
+            return view("user.order",['orders'=>$o]);
+        }
+        return redirect('login');
     }
 }

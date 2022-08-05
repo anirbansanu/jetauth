@@ -31,36 +31,30 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
 Route::get("/redirect",[HomeController::class,'redirect'])->name('admin.home');
 Route::get("/",[HomeController::class,'index']);
+Route::group(['middleware'=>['auth','user']],function(){ 
+    Route::get("/product/{id?}",[ProductController::class,'getProduct'])->name('user.product');
+    Route::get("/allproducts",[ProductController::class,'getAllProducts'])->name('user.allproducts');
+    Route::post("/cart",[HomeController::class,'addCart'])->name('user.cart');
+    Route::get("/cart",[HomeController::class,'getCart'])->name('user.cart');
+    Route::post("/updatecart",[HomeController::class,'updateCart'])->name('user.updatecart');
+    Route::post("/order",[HomeController::class,'setOrder'])->name('user.order');
+    Route::get("/order",[HomeController::class,'getOrder'])->name('user.order');
+});
+Route::group(['middleware'=>['auth','admin']],function(){
+    
+    Route::get("/users",[AdminController::class,'getAllUsers'])->name('admin.users');
+    Route::post("/usertype",[AdminController::class,'changeUserType'])->name('admin.usertype');
+    Route::post("/categories",[CategoryController::class,'setCategory'])->name('admin.addcategory');
+    Route::get("/categories",[CategoryController::class,'getAll'])->name('admin.categories');
+    Route::get("/delete_categories/{id?}",[CategoryController::class,'deleteCategory'])->name('admin.deletecategory');
+    Route::get("/products",[AdminController::class,'getProducts'])->name('admin.products');
+    Route::get("/updateproduct/{id?}",[AdminController::class,'viewProduct'])->name('admin.updateproduct');
+    Route::post("/updateproduct",[AdminController::class,'updateProduct'])->name('admin.updateproduct');
+    Route::get("/deleteproduct/{id?}",[AdminController::class,'deleteProduct'])->name('admin.deleteproduct');
+    Route::get("/addproduct",[ProductController::class,'getCategories'])->name('admin.addproduct');
+    Route::post("/setproduct",[AdminController::class,'setProducts'])->name('admin.setproduct');
 
-Route::get("/users",[AdminController::class,'getAllUsers'])->name('admin.users');
-Route::post("/usertype",[AdminController::class,'changeUserType'])->name('admin.usertype');
-
-
-Route::post("/categories",[CategoryController::class,'setCategory'])->name('admin.addcategory');
-Route::get("/categories",[CategoryController::class,'getAll'])->name('admin.categories');
-Route::get("/delete_categories/{id?}",[CategoryController::class,'deleteCategory'])->name('admin.deletecategory');
-
-
-Route::get("/product/{id?}",[ProductController::class,'getProduct'])->name('user.product');
-
-Route::get("/products",[AdminController::class,'getProducts'])->name('admin.products');
-Route::get("/updateproduct/{id?}",[AdminController::class,'viewProduct'])->name('admin.updateproduct');
-Route::post("/updateproduct",[AdminController::class,'updateProduct'])->name('admin.updateproduct');
-
-Route::get("/deleteproduct/{id?}",[AdminController::class,'deleteProduct'])->name('admin.deleteproduct');
-
-
-Route::get("/allproducts",[ProductController::class,'getAllProducts'])->name('user.allproducts');
-
-Route::get("/addproduct",[ProductController::class,'getCategories'])->name('admin.addproduct');
-
-Route::post("/setproduct",[AdminController::class,'setProducts'])->name('admin.setproduct');
-
-Route::post("/cart",[HomeController::class,'addCart'])->name('user.cart');
-Route::get("/cart",[HomeController::class,'getCart'])->name('user.cart');
-Route::post("/updatecart",[HomeController::class,'updateCart'])->name('user.updatecart');
-
+});
 

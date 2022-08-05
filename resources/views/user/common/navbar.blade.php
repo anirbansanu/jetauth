@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home
+              <a class="nav-link">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li> 
@@ -19,9 +19,16 @@
             <li class="nav-item">
               <a class="nav-link" href="about.html">About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('user.cart') }}">Cart</a>
+            @if (Route::has('login'))
+            @auth
+            <li class="nav-item d-flex ">
+              
+              <a class="nav-link pt-2" href="{{ route('user.cart') }}">
+                <i class="fa fa-shopping-cart px-2" aria-hidden="true" ></i>
+              Cart</a>
             </li>
+            @endauth
+            @endif
             <li class="nav-item">
                   @if (Route::has('login'))
                           @auth

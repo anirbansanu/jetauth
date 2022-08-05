@@ -47,7 +47,7 @@
         </div>
         @foreach ($products as $item)
           <div class="col-md-4">
-            <div class="product-item">
+            <div class="product-item p-2">
               <a href="{{ route("user.product").'/'.$item["id"] }}">
                 <img src="{{ asset('storage/product_imgs/'.$item["image"]) }}" alt="" style="height:250px;object-fit: scale-down;">
               </a>
