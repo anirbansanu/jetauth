@@ -54,11 +54,11 @@
                   <!-- Data -->
                   <p><strong><b>Description</b></strong></p>
                   <p>{{ $cart['description'] }}</p>
-                  
-                    <button type="button" class="my-3 btn btn-outline-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                    
+                    <a href="{{ route('user.cart.destroy', $cart['id'] ) }}" class="my-3 btn btn-outline-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                       title="Remove item">
                       <i class="fa fa-trash"></i>
-                    </button>
+                    </a>
                     <button type="button" class="my-3 btn btn-outline-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                       title="Move to the wish list">
                       <i class="fa-solid fa-heart"></i>

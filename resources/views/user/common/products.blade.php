@@ -47,7 +47,7 @@
         </div>
         @foreach ($products as $item)
           <div class="col-md-4">
-            <div class="product-item p-2">
+            <div class="product-item p-2 shadow">
               <a href="{{ route("user.product").'/'.$item["id"] }}">
                 <img src="{{ asset('storage/product_imgs/'.$item["image"]) }}" alt="" style="height:250px;object-fit: scale-down;">
               </a>
@@ -70,14 +70,14 @@
                   </div>
                 </div>
                 
-                <ul class="stars">
+                <ul class="stars font-weight-bold">
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
                 </ul>
-                <span>Reviews (24)</span>
+                <span class="font-weight-bold">{{ $item->category->cat_title }}</span>
               </div>
             </div>
           </div>
