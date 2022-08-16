@@ -43,7 +43,7 @@
                           <img src="{{ asset('storage/product_imgs/'.$item["image"]) }}" alt="image" style="border-radius: 0;width:50px;height:50px;">
                           <span class="ps-2"> {{  substr($item["title"], 0, 20)  }}</span>
                         </td>
-                        <td> {{ $item["cat_title"] }}</td>
+                        <td> {{ $item->category->cat_title }}</td>
                         <td> {{ $item["quantity"] }} </td>
                         <td> {{ $item["price"] }}</td>
                         <td class="text-truncate" style="max-width: 10rem;"> 
