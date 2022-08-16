@@ -73,6 +73,15 @@
               <span class="menu-title">Users</span>
             </a>
           </li>
+          {{-- Order List And Add--}}
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('admin.orders') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">Orders</span>
+            </a>
+          </li>
           {{-- Categories List And Add--}}
           <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('admin.categories') }}">
