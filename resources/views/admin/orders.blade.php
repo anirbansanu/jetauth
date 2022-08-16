@@ -22,11 +22,12 @@
           <div class="content-wrapper">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Product List</h4>
+                <h4 class="card-title">Orders List</h4>
                 <div class="table-responsive">
                   <table class="table">
                     <thead>
                       <tr>
+                        <th style="max-width: 10rem;"> Order No. </th>
                         <th style="max-width: 10rem;"> Product Name </th>
                         <th> Category</th>
                         <th> Quantity</th>
@@ -38,13 +39,14 @@
                     <tbody>
                       @foreach ($data as $item)
                       <tr>
+                        <td> {{ $item["id"] }} </td>
                         <td class="text-truncate" style="max-width: 10rem;">
-                          <img src="{{ asset('storage/product_imgs/'.$item["image"]) }}" alt="image" style="border-radius: 0;width:50px;height:50px;">
-                          <span class="ps-2"> {{  substr($item["title"], 0, 20)  }}</span>
+                          <img src="{{ asset('storage/product_imgs/'.$item->product->image) }}" alt="product image" style="border-radius: 0;width:50px;height:50px;">
+                          <span class="ps-2"> {{  substr($item->product->title, 0, 20)  }}</span>
                         </td>
-                        <td> {{ $item["cat_title"] }}</td>
-                        <td> {{ $item["quantity"] }} </td>
-                        <td> {{ $item["price"] }}</td>
+                        <td> {{ $item->product->category->cat_title }}</td>
+                        <td> {{ $item["order_quantity"] }} </td>
+                        <td> {{ $item["order_price"] }}</td>
                         
                         
                         <td class="text-center">
@@ -56,6 +58,7 @@
                           </a>
                         </td>
                       </tr>
+                      
                       @endforeach
                     </tbody>
                   </table>
