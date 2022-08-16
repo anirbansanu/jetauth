@@ -16,5 +16,10 @@ class Order extends Model
         'created_at',
         'updated_at'
     ];
-
+    function product(){
+        return $this->belongsTo(Product::class);
+    }
+    function user(){
+        return $this->belongsTo(User::class);
+    }
 }

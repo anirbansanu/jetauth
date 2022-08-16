@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,9 +14,7 @@ class AdminController extends Controller
     //
     function getProducts()
     {
-        $data = Product::join('categories', 'products.category_id', '=', 'categories.id',"left outer")
-                            ->select('products.*','categories.cat_title')
-                            ->get();
+        $data = Product::all();
         //return $data;
         return view('admin.products',["data"=>$data]);
     }
@@ -94,10 +93,7 @@ class AdminController extends Controller
 
     }
     function viewProduct($id){
-        $product = Product::join('categories', 'products.category_id', '=', 'categories.id',"left outer")
-        ->select('products.*','categories.cat_title')
-        ->where('products.id','=',$id)
-        ->first();
+        $product = Product::findOrFail($id);
         $data = Category::all();
         //return [$product,$data];
         return view('admin.updateproduct',["product"=>$product,"data"=>$data]);
@@ -114,5 +110,10 @@ class AdminController extends Controller
             return response()->json(['error' => 'Product Image not exist Operation Failed',]);
         }
         
+    }
+    function getOrders(){
+        $o = Order::all();
+        //return $o;
+        return view('admin.orders',["data"=>$o]);
     }
 }
