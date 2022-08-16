@@ -124,9 +124,13 @@
                 </li>
               </ul>
   
-              <button type="button" disabled class="btn btn-outline-danger btn-lg btn-block">
+              <button type="button" disabled class="btn btn-outline-secondary btn-lg btn-block">
                 Order Confrimed
               </button>
+              <a href="#" class="btn btn-outline-danger btn-lg btn-block">
+                Cancel Order
+              </a>
+              
             </div>
           </div>
         </div>
