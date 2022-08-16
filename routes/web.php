@@ -37,7 +37,7 @@ Route::group(['middleware'=>['auth','user']],function(){
     Route::get("/product/{id?}",[ProductController::class,'getProduct'])->name('user.product');
     Route::get("/allproducts",[ProductController::class,'getAllProducts'])->name('user.allproducts');
     Route::post("/cart",[HomeController::class,'addCart'])->name('user.cart');
-    Route::get("/cart",[HomeController::class,'getCart'])->name('user.cart');
+    Route::get("/cart",[CartController::class,'index'])->name('user.cart');
     Route::get("/cart/delete/{id}",[CartController::class,'destroy'])->name('user.cart.destroy');
     Route::post("/updatecart",[HomeController::class,'updateCart'])->name('user.updatecart');
     Route::post("/order",[HomeController::class,'setOrder'])->name('user.order');
