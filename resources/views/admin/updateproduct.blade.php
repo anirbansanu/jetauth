@@ -74,9 +74,8 @@
                                     <div class="form-group">
                                         <label for="Category">Category</label>
                                         <select class="form-control" name="category_id" id="Category">
-                                          <option default value="{{ $product['category_id'] }}">{{ $product["cat_title"] }}</option>
                                           @foreach ($data as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['cat_title'] }}</option>
+                                            <option value="{{ $item['id'] }}" {{ $product["category_id"]==$item['id']?"selected":"" }}>{{ $item['cat_title'] }}</option>
                                           @endforeach
                                         </select>
                                     </div>
