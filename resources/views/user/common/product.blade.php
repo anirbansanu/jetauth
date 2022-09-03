@@ -44,15 +44,13 @@
                         <span class="text-danger">Reviews (24)</span>
                     </div>
                 </div>
-                <div class="card-body ">
+                <div class="card-body">
                     <p class="font-weight-bold h5 py-1">Description</p>
                     <p class="border-bottom py-3">{{ $product['description']  }}</p>
                     <div class="card-body d-flex justify-content-between px-0">
-                        <form method="POST" action="{{ route('user.cart') }}">
-                            @csrf
-                            <input class="hidden" type="hidden" name="product_id" value="{{ $product['id']  }}"/>
-                            <button type="submit" name="addToCart" class="btn btn-lg btn-danger">Add To Cart</button>
-                        </form>
+                        
+                            <button type="submit" name="addToCart" id="addToCart" data-product="{{ $product['id'] }}" class="btn btn-lg btn-danger" >Add To Cart</button>
+                            
                             <button type="submit" name="Buy" class="btn btn-lg btn-outline-danger">Buy Now</button>
                         
                     </div>

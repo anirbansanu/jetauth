@@ -27,7 +27,7 @@ class HomeController extends Controller
     function index(){
         $uid = Auth::id();
         if($uid)
-        return redirect('redirect');
+        return redirect('/');
         else
         {
             $result = (new ProductController)->getProducts();

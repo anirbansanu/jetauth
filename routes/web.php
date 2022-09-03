@@ -34,9 +34,10 @@ Route::middleware([
 Route::get("/redirect",[HomeController::class,'redirect'])->name('admin.home');
 Route::get("/",[HomeController::class,'index']);
 Route::group(['middleware'=>['auth','user']],function(){ 
+    //Route::get("/redirect",[HomeController::class,'redirect'])->name('user.home');
     Route::get("/product/{id?}",[ProductController::class,'getProduct'])->name('user.product');
     Route::get("/allproducts",[ProductController::class,'getAllProducts'])->name('user.allproducts');
-    Route::post("/cart",[HomeController::class,'addCart'])->name('user.cart');
+    Route::post("/cart",[CartController::class,'store'])->name('user.cart');
     Route::get("/cart",[CartController::class,'index'])->name('user.cart');
     Route::get("/cart/delete/{id}",[CartController::class,'destroy'])->name('user.cart.destroy');
     Route::post("/updatecart",[HomeController::class,'updateCart'])->name('user.updatecart');
@@ -44,7 +45,7 @@ Route::group(['middleware'=>['auth','user']],function(){
     Route::get("/order",[HomeController::class,'getOrder'])->name('user.order');
 });
 Route::group(['middleware'=>['auth','admin']],function(){
-    
+    //Route::get("/redirect",[HomeController::class,'redirect'])->name('admin.home');
     Route::get("/users",[AdminController::class,'getAllUsers'])->name('admin.users');
     Route::post("/usertype",[AdminController::class,'changeUserType'])->name('admin.usertype');
     Route::post("/categories",[CategoryController::class,'setCategory'])->name('admin.addcategory');

@@ -35,9 +35,15 @@
                 @endif
       <div class="row">
         <div class="col-md-12">
-          <div class="section-heading">
+          <div class="section-heading d-flex justify-content-between">
             <h2>Latest Products</h2>
-            <a href="{{ route("user.allproducts") }}">view all products <i class="fa fa-angle-right"></i></a>
+            <a href="{{ route("user.allproducts") }}" class="{{ Route::currentRouteName() == 'user.allproducts'?'d-none': 'd-block' }}">view all products <i class="fa fa-angle-right"></i></a>
+            <div class="form-group col-md-4 {{ Route::currentRouteName() == 'user.allproducts'?' d-block': 'd-none' }}">
+              <select id="inputState" class="form-control">
+                <option selected><span class="text-danger text-bold">Filter</span></option>
+                <option>...</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="col-md-12 pb-5">

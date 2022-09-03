@@ -50,11 +50,12 @@ class CartController extends Controller
             $data->save();
 
             //return $data;
-            return redirect('cart')->with('success', 'Product Added To the Cart');
+            //return redirect('cart')->with('success', 'Product Added To the Cart');
+            return response()->json(['data' => 'Product Added To the Cart'], 201); 
         }
         else
         {
-            return redirect()->route('login');
+            return response()->json(['data' => 'Failed To Add Product In Cart'], 201); 
         }
        
     }
