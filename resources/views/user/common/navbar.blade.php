@@ -52,7 +52,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <h6 class="p-3 mb-0"> {{ __('Manage') }}</h6>
                               <div class="dropdown-divider"></div>
-                              <a class="dropdown-item btn-danger" href="{{ route('profile.show') }}">
+                              <a class="dropdown-item" href="{{ route('profile.show') }}">
                                 
                                 
                                   {{ __('Profile') }}
@@ -63,6 +63,14 @@
                                                     {{ __('API Tokens') }}
                                                 </x-jet-dropdown-link>
                               @endif
+                              @auth
+                              <a class="dropdown-item " href="{{ route('user.order') }}">
+
+                                {{ __('My Orders') }}
+                             
+                              </a>
+                              @endauth
+                              
                               <div class="dropdown-divider"></div>
                                 
                               <form method="POST" action="{{ route('logout') }}" x-data>
