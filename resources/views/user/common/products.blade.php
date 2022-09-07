@@ -33,17 +33,16 @@
                         
                     </div>
                 @endif
-      <div class="row">
+      <div class="row mt-5">
         <div class="col-md-12">
-          <div class="section-heading d-flex justify-content-between">
+          <div class="section-heading ">
             <h2>Latest Products</h2>
-            <a href="{{ route("user.allproducts") }}" class="{{ Route::currentRouteName() == 'user.allproducts'?'d-none': 'd-block' }}">view all products <i class="fa fa-angle-right"></i></a>
-            <div class="form-group col-md-4 {{ Route::currentRouteName() == 'user.allproducts'?' d-block': 'd-none' }}">
-              <select id="inputState" class="form-control">
-                <option selected><span class="text-danger text-bold">Filter</span></option>
-                <option>...</option>
-              </select>
-            </div>
+            
+            <a href="{{ route("user.allproducts") }}" class="justify-content-end {{ Route::currentRouteName() == 'user.allproducts'?'d-none': 'd-flex' }}">view all products <i class="fa fa-angle-right"></i></a>
+            <a href="#" data-toggle="modal" data-target="#myModal2" class="display-3 justify-content-end btn btn-outline-danger {{ Route::currentRouteName() == 'user.allproducts'? 'd-flex': 'd-none' }}">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+            </a>
+            
           </div>
         </div>
         <div class="col-md-12 pb-5">
