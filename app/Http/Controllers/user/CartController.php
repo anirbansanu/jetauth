@@ -13,23 +13,38 @@ use Illuminate\Support\Facades\Redirect;
 class CartController extends Controller
 {
     //
-    public function index()
-    {
-        $u_id = auth()->user()?auth()->user()->id:false;
-        if($u_id)
-        {
-            $carts = Cart::join('products', 'carts.product_id', '=', 'products.id')
-                            ->join('users', 'carts.user_id', '=', 'users.id')
-                            ->select('products.*','users.name','users.address','users.phone','carts.*')
-                            ->where('carts.user_id','=',$u_id)
-                            ->get();
-            //return $carts;
-            return view("user.cart",['carts'=>$carts]);
-        }
-        else
-        {
-            return redirect()->back()->with('error', 'Carts Not Exists, Operation Failed');
-        }
+    // public function index()
+    // {
+    //     $u_id = auth()->user()?auth()->user()->id:false;
+    //     if($u_id)
+    //     {
+    //         $carts = Cart::join('products', 'carts.product_id', '=', 'products.id')
+    //                         ->join('users', 'carts.user_id', '=', 'users.id')
+    //                         ->select('products.*','users.name','users.address','users.phone','carts.*')
+    //                         ->where('carts.user_id','=',$u_id)
+    //                         ->get();
+    //         //return $carts;
+    //         return view("user.cart",['carts'=>$carts]);
+    //     }
+    //     else
+    //     {
+    //         return redirect()->back()->with('error', 'Carts Not Exists, Operation Failed');
+    //     }
+    // }
+    // public function index()
+    // {
+    //     $user = User::with('cart')->with(['cart'=>function($query){
+    //         $query->orderBy('created_at', 'DESC');
+    //       }])
+    //       ->where('id',$u_id = auth()->user()?auth()->user()->id:false)->get();
+        
+    //     //return view("user.cart",['carts'=>$user]);
+    //     return $user;
+    // }
+    public function index(){
+        $user = User::with('recentItemCart')
+        ->where('id',$u_id = auth()->user()?auth()->user()->id:false)->get();
+        return $user;
     }
     public function store(Request $request)
     {

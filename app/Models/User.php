@@ -66,4 +66,13 @@ class User extends Authenticatable
     function order(){
         return $this->hasMany(Order::class);
     }
+    public function recentItemCart()
+    {
+        return $this->hasOne(Cart::class)->ofMany([
+            'created_at' => 'max',
+            'id' => 'max',
+        ], function ($query) {
+            $query->where('created_at', '>', now());
+        });
+    }
 }
