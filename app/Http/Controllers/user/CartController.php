@@ -31,21 +31,21 @@ class CartController extends Controller
     //         return redirect()->back()->with('error', 'Carts Not Exists, Operation Failed');
     //     }
     // }
-    // public function index()
-    // {
-    //     $user = User::with('cart')->with(['cart'=>function($query){
-    //         $query->orderBy('created_at', 'DESC');
-    //       }])
-    //       ->where('id',$u_id = auth()->user()?auth()->user()->id:false)->get();
+    public function index()
+    {
+        $user = User::with('cart')->with(['cart'=>function($query){
+            $query->orderBy('created_at', 'DESC');
+          }])
+          ->where('id',$u_id = auth()->user()?auth()->user()->id:false)->get();
         
-    //     //return view("user.cart",['carts'=>$user]);
-    //     return $user;
-    // }
-    public function index(){
-        $user = User::with('recentItemCart')
-        ->where('id',$u_id = auth()->user()?auth()->user()->id:false)->get();
+        //return view("user.cart",['carts'=>$user]);
         return $user;
     }
+    // public function index(){
+    //     $user = User::with('recentItemCart')
+    //     ->where('id',$u_id = auth()->user()?auth()->user()->id:false)->get();
+    //     return $user;
+    // }
     public function store(Request $request)
     {
         if(Auth::id())

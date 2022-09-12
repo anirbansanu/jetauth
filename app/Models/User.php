@@ -72,7 +72,7 @@ class User extends Authenticatable
             'created_at' => 'max',
             'id' => 'max',
         ], function ($query) {
-            $query->where('created_at', '>', now());
+            $query->where('created_at', '<', now());
         });
     }
 }
