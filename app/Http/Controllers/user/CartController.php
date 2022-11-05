@@ -32,7 +32,7 @@ class CartController extends Controller
     //     }
     // }
     public function index()
-    {
+    { 
         $user = User::with('cart')->with(['cart'=>function($query){
             $query->orderBy('created_at', 'DESC');
           }])
