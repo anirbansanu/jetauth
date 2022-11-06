@@ -5,6 +5,7 @@ use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\user\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +43,9 @@ Route::group(['middleware'=>['auth','user']],function(){
     Route::get("/cart/delete/{id}",[CartController::class,'destroy'])->name('user.cart.destroy');
     Route::post("/updatecart",[HomeController::class,'updateCart'])->name('user.updatecart');
     Route::post("/order",[HomeController::class,'setOrder'])->name('user.order');
-    Route::get("/order",[HomeController::class,'getOrder'])->name('user.order');
+    Route::get("/order",[OrderController::class,'getOrder'])->name('user.order');
+    Route::post("/payment",[OrderController::class,'payment'])->name('user.payment');
+
 });
 Route::group(['middleware'=>['auth','admin']],function(){
     //Route::get("/redirect",[HomeController::class,'redirect'])->name('admin.home');

@@ -87,7 +87,33 @@
               <img class="me-2" width="45px"
                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
                 alt="Mastercard" />
-              
+                <form class="pt-3 pb-3" id="payment-form" action="{{ route("user.payment") }}" method="POST" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" >
+                  @csrf
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="card-number" name="card_number" placeholder="Card Number"> 
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      
+                      <div class="col-6 col-md-4 ">
+                        <input type="text" class="form-control" id="month" name="month" placeholder="Mounth">
+                      </div>
+                      <div class="col-6 col-md-4">
+                        <input type="text" class="form-control" id="year" name="year" placeholder="Year"> 
+                      </div>
+                      <div class="col-12 col-md-4 pt-2 pt-md-0">
+                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV"> 
+                      </div>
+
+                    </div>
+                  </div>
+                  
+                  
+                  <button type="submit" class="btn btn-outline-danger">Payment Confrim</button>
+                </form>
             </div>
           </div>
         </div>
